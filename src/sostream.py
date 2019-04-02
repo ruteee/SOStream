@@ -3,11 +3,8 @@ from find_neighbors import find_neighbors
 from update_cluster import updateCluster
 from find_overlap import find_overlap
 from merge_clusters import merge_clusters
-# from new_cluster import new_cluster
+from new_cluster import newCluster
 
-# Mock new cluster function
-def new_cluster(vt):
-    pass
 
 class SOStream:
 
@@ -23,11 +20,11 @@ class SOStream:
             if dist(vt, winner_micro_cluster['C'] < winner_micro_cluster['r']):
                 updateCluster(winner_micro_cluster, vt, self.alpha, winner_neighborhood)
             else:
-                new_cluster(vt)
+                newCluster(self.M, vt)
             overlap = find_overlap(winner_micro_cluster, winner_neighborhood)
             if len(overlap) > 0:
                 merge_clusters(winner_micro_cluster, overlap)
         else:
-            new_cluster(vt)
+            newCluster(self.M, vt)
 
     pass
