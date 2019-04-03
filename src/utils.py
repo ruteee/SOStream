@@ -11,7 +11,7 @@ def weighted_mean(a, b, mean_a, mean_b):
 
 
 def min_dist(vt, micro_clusters):
-    micro_cluster_min_dist = 0
+    micro_cluster_min_dist = float('inf')
     min_micro_cluster = None
     for micro_cluster in micro_clusters:
         dist_to_micro_cluster = dist(vt, micro_cluster['C'])
