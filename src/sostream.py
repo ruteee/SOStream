@@ -19,7 +19,7 @@ class SOStream:
         new_M = self.M[-1].copy()
         if len(new_M) >= self.min_pts:
             winner_neighborhood = find_neighbors(winner_micro_cluster, self.min_pts, new_M)
-            if dist(vt, winner_micro_cluster['C']) < winner_micro_cluster['r']:
+            if dist(vt, winner_micro_cluster.centroid) < winner_micro_cluster.radius:
                 updateCluster(winner_micro_cluster, vt, self.alpha, winner_neighborhood)
             else:
                 new_M.append(newCluster(vt))
@@ -28,7 +28,8 @@ class SOStream:
                 merged_cluster, deleted_clusters = merge_clusters(winner_micro_cluster, overlap, self.merge_threshold)
                 for deleted_cluster in deleted_clusters:
                     new_M.remove(deleted_cluster)
-                new_M.append(merged_cluster)
+                if merged_cluster is not None:
+                    new_M.append(merged_cluster)
         else:
             new_M.append(newCluster(vt))
         self.M.append(new_M)
